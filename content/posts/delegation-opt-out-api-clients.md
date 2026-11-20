@@ -5,6 +5,10 @@ draft: false
 tags: ["multi-tenant", "access-control", "api-clients", "account-takeover", "methodology"]
 summary: "Platforms that let a child tenant opt out of parent management often enforce the opt-out in the console but not on machine credentials. How to test the gap, and how to close it."
 cwe: "CWE-285"
+cover:
+  image: "/images/delegation-opt-out-api-clients.svg"
+  alt: "The console path runs the self-managed mode check, the API client path does not"
+  relative: false
 ---
 
 ## TL;DR

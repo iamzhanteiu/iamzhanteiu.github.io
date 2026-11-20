@@ -23,7 +23,7 @@ enableRobotsTXT = true
 
   [params.homeInfoParams]
     Title = "Offsec Journal"
-    Content = "Writeups and research notes from disclosed bug bounty reports."
+    Content = "Research notes on web and API security: access control, multi-tenancy and the bugs between them."
 
   [[params.socialIcons]]
     name = "github"

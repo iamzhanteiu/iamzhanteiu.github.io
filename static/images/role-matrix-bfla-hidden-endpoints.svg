@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630" role="img" aria-labelledby="t d">
+  <title id="t">Hidden in the UI, open in the API</title>
+  <desc id="d">The documented role matrix says an operator may not delete devices and the console hides the button, but a direct DELETE request from the operator session passes the tenant check, skips the permission check, and deletes the device.</desc>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#94a3b8"/>
+    </marker>
+    <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#f87171"/>
+    </marker>
+  </defs>
+  <style>
+    .sans{font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+    .mono{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+    .box{fill:#1e293b;stroke:#334155;stroke-width:2}
+    .lbl{fill:#e2e8f0;font-size:18px}
+    .cell{fill:#e2e8f0;font-size:16px}
+  </style>
+  <rect width="1200" height="630" rx="24" fill="#0f172a"/>
+  <text x="48" y="66" class="sans" font-size="30" font-weight="700" fill="#f8fafc">The button is hidden, the endpoint is not</text>
+
+  <!-- operator -->
+  <rect x="48" y="270" width="210" height="72" rx="12" fill="#1e293b" stroke="#fbbf24" stroke-width="2"/>
+  <text x="153" y="300" class="sans lbl" text-anchor="middle">Operator session</text>
+  <text x="153" y="326" class="sans" font-size="15" fill="#94a3b8" text-anchor="middle">narrow role</text>
+
+  <!-- UI path -->
+  <path d="M258 294 H296 V190 H334" stroke="#94a3b8" stroke-width="2.5" fill="none" marker-end="url(#a)"/>
+  <rect x="336" y="120" width="300" height="150" rx="12" fill="#111827" stroke="#334155" stroke-width="2"/>
+  <text x="356" y="150" class="sans" font-size="16" fill="#94a3b8">Console · Device actions</text>
+  <rect x="356" y="166" width="260" height="38" rx="8" fill="#1d4ed8"/>
+  <text x="486" y="191" class="sans" font-size="16" font-weight="600" fill="#eff6ff" text-anchor="middle">Start remote session</text>
+  <rect x="356" y="216" width="260" height="38" rx="8" fill="none" stroke="#475569" stroke-width="2" stroke-dasharray="6 5"/>
+  <text x="486" y="241" class="sans" font-size="16" fill="#64748b" text-anchor="middle" text-decoration="line-through">Delete device</text>
+
+  <!-- role matrix -->
+  <rect x="700" y="120" width="452" height="150" rx="12" fill="#111827" stroke="#334155" stroke-width="2"/>
+  <text x="720" y="150" class="sans" font-size="16" fill="#94a3b8">Documented role matrix</text>
+  <text x="980" y="150" class="sans" font-size="15" fill="#94a3b8" text-anchor="middle">Admin</text>
+  <text x="1080" y="150" class="sans" font-size="15" fill="#94a3b8" text-anchor="middle">Operator</text>
+  <line x1="720" y1="162" x2="1132" y2="162" stroke="#334155" stroke-width="1.5"/>
+  <text x="720" y="190" class="sans cell">List devices</text><text x="980" y="190" class="sans" font-size="16" fill="#4ade80" text-anchor="middle">✓</text><text x="1080" y="190" class="sans" font-size="16" fill="#4ade80" text-anchor="middle">✓</text>
+  <text x="720" y="220" class="sans cell">Remote session</text><text x="980" y="220" class="sans" font-size="16" fill="#4ade80" text-anchor="middle">✓</text><text x="1080" y="220" class="sans" font-size="16" fill="#4ade80" text-anchor="middle">✓</text>
+  <text x="720" y="250" class="sans cell">Delete device</text><text x="980" y="250" class="sans" font-size="16" fill="#4ade80" text-anchor="middle">✓</text><text x="1080" y="250" class="sans" font-size="16" font-weight="700" fill="#f87171" text-anchor="middle">✗</text>
+
+  <!-- API path -->
+  <path d="M258 318 H296 V440 H334" stroke="#f87171" stroke-width="2.5" fill="none" marker-end="url(#ar)"/>
+  <rect x="336" y="404" width="300" height="72" rx="10" fill="#1e293b" stroke="#f87171" stroke-width="2"/>
+  <text x="486" y="436" class="mono" font-size="17" fill="#fca5a5" text-anchor="middle">DELETE /api/devices/{id}</text>
+  <text x="486" y="460" class="sans" font-size="14" fill="#94a3b8" text-anchor="middle">id taken from "List devices"</text>
+  <path d="M636 440 H698" stroke="#f87171" stroke-width="2.5" marker-end="url(#ar)"/>
+  <rect x="700" y="390" width="260" height="100" rx="10" class="box"/>
+  <text x="830" y="420" class="sans lbl" text-anchor="middle">Backend</text>
+  <text x="724" y="448" class="sans" font-size="15" fill="#4ade80">✓ <tspan fill="#e2e8f0">user is in tenant</tspan></text>
+  <text x="724" y="474" class="sans" font-size="15" fill="#f87171">✗ <tspan font-weight="700">device.delete not checked</tspan></text>
+  <path d="M960 440 H1010" stroke="#f87171" stroke-width="2.5" marker-end="url(#ar)"/>
+  <rect x="1012" y="404" width="140" height="72" rx="10" fill="#450a0a" stroke="#f87171" stroke-width="2"/>
+  <text x="1082" y="436" class="sans" font-size="20" font-weight="700" fill="#fecaca" text-anchor="middle">204</text>
+  <text x="1082" y="460" class="sans" font-size="14" fill="#fca5a5" text-anchor="middle">device deleted</text>
+
+  <text x="600" y="570" class="sans" font-size="18" fill="#94a3b8" text-anchor="middle">A hidden button is a UX decision, not an access control</text>
+</svg>

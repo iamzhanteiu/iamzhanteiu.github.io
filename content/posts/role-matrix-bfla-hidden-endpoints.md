@@ -5,6 +5,10 @@ draft: false
 tags: ["bfla", "access-control", "privilege-escalation", "api-security", "methodology"]
 summary: "Narrow operator roles in large consoles are a rich source of broken function level authorization. A repeatable way to build a role matrix, replay actions across roles, and report the gaps."
 cwe: "CWE-285"
+cover:
+  image: "/images/role-matrix-bfla-hidden-endpoints.svg"
+  alt: "The console hides Delete device from operators, but a direct DELETE request succeeds"
+  relative: false
 ---
 
 ## TL;DR

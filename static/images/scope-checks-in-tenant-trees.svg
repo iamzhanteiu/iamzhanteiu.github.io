@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630" role="img" aria-labelledby="t d">
+  <title id="t">Missing scope check: cross-tenant email rebind</title>
+  <desc id="d">A low-privileged user in Organization A1 sends an email update for an admin in Organization B1 under another reseller. The server checks token, capability and caller tenant, but not whether the target is in the caller's subtree, which leads to a takeover chain.</desc>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#94a3b8"/>
+    </marker>
+    <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#f87171"/>
+    </marker>
+  </defs>
+  <style>
+    .sans{font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+    .mono{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+    .box{fill:#1e293b;stroke:#334155;stroke-width:2}
+    .lbl{fill:#e2e8f0;font-size:18px}
+    .muted{fill:#94a3b8}
+    .line{stroke:#475569;stroke-width:2;fill:none}
+  </style>
+  <rect width="1200" height="630" rx="24" fill="#0f172a"/>
+  <text x="48" y="66" class="sans" font-size="30" font-weight="700" fill="#f8fafc">Missing scope check → cross-tenant email rebind</text>
+
+  <!-- left tree -->
+  <rect x="60" y="110" width="260" height="52" rx="10" class="box"/>
+  <text x="190" y="142" class="sans lbl" text-anchor="middle">Reseller A</text>
+  <rect x="100" y="190" width="260" height="52" rx="10" class="box"/>
+  <text x="230" y="222" class="sans lbl" text-anchor="middle">Organization A1</text>
+  <rect x="140" y="270" width="260" height="52" rx="10" fill="#1e293b" stroke="#f87171" stroke-width="2"/>
+  <text x="270" y="302" class="sans lbl" text-anchor="middle">Low-priv user (attacker)</text>
+  <path d="M80 162 V216 H100" class="line"/>
+  <path d="M120 242 V296 H140" class="line"/>
+
+  <!-- right tree (mirrored) -->
+  <rect x="880" y="110" width="260" height="52" rx="10" class="box"/>
+  <text x="1010" y="142" class="sans lbl" text-anchor="middle">Reseller B</text>
+  <rect x="840" y="190" width="260" height="52" rx="10" class="box"/>
+  <text x="970" y="222" class="sans lbl" text-anchor="middle">Organization B1</text>
+  <rect x="800" y="270" width="260" height="52" rx="10" fill="#1e293b" stroke="#fbbf24" stroke-width="2"/>
+  <text x="930" y="302" class="sans lbl" text-anchor="middle">Org admin (victim)</text>
+  <path d="M1120 162 V216 H1100" class="line"/>
+  <path d="M1080 242 V296 H1060" class="line"/>
+
+  <!-- request -->
+  <text x="600" y="232" class="sans" font-size="15" fill="#fbbf24" text-anchor="middle">target lives in another reseller's subtree</text>
+  <rect x="440" y="248" width="320" height="96" rx="10" fill="#111827" stroke="#f87171" stroke-width="2"/>
+  <text x="600" y="278" class="mono" font-size="16" fill="#f8fafc" text-anchor="middle">POST /api/users/email</text>
+  <text x="600" y="304" class="mono" font-size="15" fill="#fca5a5" text-anchor="middle">user_id: &lt;B1 admin&gt;</text>
+  <text x="600" y="328" class="mono" font-size="15" fill="#fca5a5" text-anchor="middle">email: attacker inbox</text>
+  <path d="M400 296 H438" stroke="#f87171" stroke-width="2.5" marker-end="url(#ar)"/>
+  <path d="M760 296 H798" stroke="#f87171" stroke-width="2.5" marker-end="url(#ar)"/>
+
+  <!-- checks panel -->
+  <rect x="60" y="384" width="520" height="206" rx="14" fill="#111827" stroke="#334155" stroke-width="2"/>
+  <text x="84" y="418" class="sans" font-size="19" font-weight="700" fill="#f8fafc">Server-side checks</text>
+  <text x="84" y="456" class="sans" font-size="17" fill="#4ade80">✓</text><text x="112" y="456" class="sans lbl" font-size="17">Token is valid</text>
+  <text x="84" y="488" class="sans" font-size="17" fill="#4ade80">✓</text><text x="112" y="488" class="sans lbl" font-size="17">Role has "edit user" capability</text>
+  <text x="84" y="520" class="sans" font-size="17" fill="#4ade80">✓</text><text x="112" y="520" class="sans lbl" font-size="17">Caller belongs to X-Tenant-Context</text>
+  <text x="84" y="560" class="sans" font-size="17" fill="#f87171">✗</text><text x="112" y="560" class="sans" font-size="17" font-weight="700" fill="#f87171">Target inside caller's subtree (missing)</text>
+
+  <!-- chain panel -->
+  <rect x="620" y="384" width="520" height="206" rx="14" fill="#111827" stroke="#334155" stroke-width="2"/>
+  <text x="644" y="418" class="sans" font-size="19" font-weight="700" fill="#f8fafc">Takeover chain</text>
+  <text x="644" y="456" class="sans lbl" font-size="17"><tspan fill="#fbbf24" font-weight="700">1</tspan>  Rebind the admin's email</text>
+  <text x="644" y="488" class="sans lbl" font-size="17"><tspan fill="#fbbf24" font-weight="700">2</tspan>  Confirm from the attacker inbox</text>
+  <text x="644" y="520" class="sans lbl" font-size="17"><tspan fill="#fbbf24" font-weight="700">3</tspan>  Password reset lands in that inbox</text>
+  <text x="644" y="560" class="sans" font-size="17" font-weight="700" fill="#f87171"><tspan fill="#fbbf24">4</tspan>  Log in as admin → tenant takeover</text>
+</svg>

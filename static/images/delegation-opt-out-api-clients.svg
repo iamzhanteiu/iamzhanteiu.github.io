@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630" role="img" aria-labelledby="t d">
+  <title id="t">Self-managed mode enforced on one path only</title>
+  <desc id="d">A parent admin is blocked from managing a self-managed child tenant through the console, but the same admin's API client token reaches the password endpoint without the mode check and takes over a child user.</desc>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#94a3b8"/>
+    </marker>
+    <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#f87171"/>
+    </marker>
+  </defs>
+  <style>
+    .sans{font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+    .mono{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+    .box{fill:#1e293b;stroke:#334155;stroke-width:2}
+    .lbl{fill:#e2e8f0;font-size:18px}
+  </style>
+  <rect width="1200" height="630" rx="24" fill="#0f172a"/>
+  <text x="48" y="66" class="sans" font-size="30" font-weight="700" fill="#f8fafc">"No parent access" enforced on one path only</text>
+
+  <!-- parent -->
+  <rect x="48" y="262" width="210" height="72" rx="12" fill="#1e293b" stroke="#fbbf24" stroke-width="2"/>
+  <text x="153" y="292" class="sans lbl" text-anchor="middle">Parent admin</text>
+  <text x="153" y="318" class="sans" font-size="15" fill="#94a3b8" text-anchor="middle">reseller tenant</text>
+
+  <!-- child tenant container -->
+  <rect x="920" y="110" width="236" height="440" rx="16" fill="none" stroke="#475569" stroke-width="2" stroke-dasharray="8 6"/>
+  <text x="1038" y="140" class="sans" font-size="16" fill="#94a3b8" text-anchor="middle">Child tenant</text>
+  <text x="1038" y="162" class="sans" font-size="16" font-weight="700" fill="#60a5fa" text-anchor="middle">mode: self-managed</text>
+
+  <!-- console path -->
+  <path d="M258 286 H300 V196 H338" stroke="#94a3b8" stroke-width="2.5" fill="none" marker-end="url(#a)"/>
+  <rect x="340" y="164" width="240" height="64" rx="10" class="box"/>
+  <text x="460" y="192" class="sans lbl" text-anchor="middle">Console session</text>
+  <text x="460" y="215" class="sans" font-size="14" fill="#94a3b8" text-anchor="middle">cookie / user token</text>
+  <path d="M580 196 H628" stroke="#94a3b8" stroke-width="2.5" marker-end="url(#a)"/>
+  <rect x="630" y="164" width="240" height="64" rx="10" fill="#1e293b" stroke="#4ade80" stroke-width="2"/>
+  <text x="750" y="192" class="sans lbl" text-anchor="middle">Mode check runs</text>
+  <text x="750" y="215" class="sans" font-size="14" fill="#4ade80" text-anchor="middle">✓ parent has no access</text>
+  <rect x="944" y="180" width="188" height="56" rx="10" fill="#14532d" stroke="#4ade80" stroke-width="2"/>
+  <text x="1038" y="214" class="sans" font-size="17" font-weight="700" fill="#dcfce7" text-anchor="middle">403 / hidden</text>
+  <path d="M870 196 H942" stroke="#4ade80" stroke-width="2.5" marker-end="url(#a)"/>
+
+  <!-- api client path -->
+  <path d="M258 310 H300 V410 H338" stroke="#f87171" stroke-width="2.5" fill="none" marker-end="url(#ar)"/>
+  <rect x="340" y="370" width="240" height="80" rx="10" class="box"/>
+  <text x="460" y="402" class="sans lbl" text-anchor="middle">API client token</text>
+  <text x="460" y="428" class="mono" font-size="14" fill="#94a3b8" text-anchor="middle">client_credentials</text>
+  <path d="M580 410 H628" stroke="#f87171" stroke-width="2.5" marker-end="url(#ar)"/>
+  <rect x="630" y="370" width="240" height="80" rx="10" fill="#1e293b" stroke="#f87171" stroke-width="2"/>
+  <text x="750" y="402" class="sans lbl" text-anchor="middle">Different route</text>
+  <text x="750" y="428" class="sans" font-size="14" fill="#f87171" text-anchor="middle">✗ mode never checked</text>
+  <path d="M870 410 H942" stroke="#f87171" stroke-width="2.5" marker-end="url(#ar)"/>
+  <rect x="944" y="370" width="188" height="80" rx="10" fill="#450a0a" stroke="#f87171" stroke-width="2"/>
+  <text x="1038" y="400" class="mono" font-size="14" fill="#fecaca" text-anchor="middle">POST /users/{id}</text>
+  <text x="1038" y="420" class="mono" font-size="14" fill="#fecaca" text-anchor="middle">/password</text>
+  <text x="1038" y="440" class="sans" font-size="14" font-weight="700" fill="#f87171" text-anchor="middle">200 OK</text>
+  <text x="1038" y="490" class="sans" font-size="16" font-weight="700" fill="#f87171" text-anchor="middle">Child user taken over</text>
+
+  <text x="600" y="590" class="sans" font-size="18" fill="#94a3b8" text-anchor="middle">Same admin, same target, different credential → different answer</text>
+</svg>

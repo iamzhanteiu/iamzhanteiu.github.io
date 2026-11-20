@@ -5,6 +5,10 @@ draft: false
 tags: ["403-bypass", "path-normalization", "reverse-proxy", "information-disclosure", "methodology"]
 summary: "Why a semicolon and a tab can turn a 403 into a 200, how to reason about parser differentials instead of spraying payloads, and how to fix the root cause."
 cwe: "CWE-436"
+cover:
+  image: "/images/path-parsing-differentials-403-bypass.svg"
+  alt: "The proxy blocks /app/metrics but forwards /app;%09/metrics, which the app server normalizes back to /app/metrics"
+  relative: false
 ---
 
 ## TL;DR

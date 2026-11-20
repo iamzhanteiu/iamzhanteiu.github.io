@@ -5,6 +5,10 @@ draft: false
 tags: ["multi-tenant", "idor", "access-control", "account-takeover", "methodology"]
 summary: "Capability checks and scope checks are different controls. How missing scope checks in hierarchical multi-tenant APIs turn an email update into a tenant takeover, and how to hunt and fix the bug class."
 cwe: "CWE-639"
+cover:
+  image: "/images/scope-checks-in-tenant-trees.svg"
+  alt: "A low-privileged user rebinds an admin email in another reseller's subtree because the server never checks the target's scope"
+  relative: false
 ---
 
 ## TL;DR
