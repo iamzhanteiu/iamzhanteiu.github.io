@@ -1,0 +1,59 @@
+baseURL = "https://iamzhanteiu.github.io/"
+locale = "en-us"
+title = "Offsec Journal"
+theme = "PaperMod"
+enableRobotsTXT = true
+
+[pagination]
+  pagerSize = 10
+
+[outputs]
+  home = ["HTML", "RSS", "JSON"]
+
+[params]
+  author = "iamzhanteiu"
+  description = "Offensive security research and bug bounty writeups."
+  defaultTheme = "auto"
+  ShowReadingTime = true
+  ShowPostNavLinks = true
+  ShowBreadCrumbs = true
+  ShowCodeCopyButtons = true
+  ShowToc = true
+  TocOpen = false
+
+  [params.homeInfoParams]
+    Title = "Offsec Journal"
+    Content = "Writeups and research notes from disclosed bug bounty reports."
+
+  [[params.socialIcons]]
+    name = "github"
+    url = "https://github.com/iamzhanteiu"
+
+  [[params.socialIcons]]
+    name = "rss"
+    url = "index.xml"
+
+[markup]
+  [markup.highlight]
+    noClasses = false
+    style = "monokai"
+  [markup.goldmark.renderer]
+    unsafe = false
+
+[menu]
+  [[menu.main]]
+    name = "Posts"
+    url = "/posts/"
+    weight = 10
+  [[menu.main]]
+    name = "Tags"
+    url = "/tags/"
+    weight = 20
+  [[menu.main]]
+    name = "Search"
+    url = "/search/"
+    weight = 30
+  [[menu.main]]
+    name = "About"
+    url = "/about/"
+    weight = 40
